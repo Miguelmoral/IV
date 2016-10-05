@@ -24,6 +24,7 @@ Para que aparezca esta información cuando realicemos un commit ejecutaremos los
 git config --global user.name "Miguelmoral"
 
 ```
+
 ```
 git config --global user.email "miguelmoralllamas@correo.ugr.es"
 
@@ -37,10 +38,12 @@ Una vez creemos estos archivos en local los subiremos mediante git con los sigui
 git add .
 
 ```
+
 ```
 git commit -m "Incorporación de archivos README, LICENSE y gitignore"
 
 ```
+
 ```
 git push origin hito0
 
