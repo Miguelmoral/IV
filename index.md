@@ -31,9 +31,12 @@ git config --global user.email "miguelmoralllamas@correo.ugr.es"
 ```
 
 ## 5- Creación del milestone práctica0 y sus correspondientes issues
+
 La interfaz de github nos permite crear y manejar milestones e issues de una manera sencilla, tan solo tendremos que crear un nuevo milestone llamado práctica 0 y una vez que pinchemos sobre este milestone nos dará la opción de crear distintos issues para alcanzar el milestone. Conforme vallamos completando y eliminando los issues que realicemos se nos mostrará el porcentaje de issues que nos queda para completar el milestone.
+
 ## 6- Creación de los archivos README, LICENSE y gitignore
 Una vez creemos estos archivos en local los subiremos mediante git con los siguientes comandos:
+
 ```
 git add .
 
