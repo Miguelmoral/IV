@@ -41,7 +41,7 @@ Una vez creemos estos archivos en local los subiremos mediante git con los sigui
 
 `git push origin hito0`
 
-##Primer hito: Estructuración del proyecto
+## Primer hito: Estructuración del proyecto
 
 ### Prerrequisitos
 - [x] Tener aprobado el hito 0 de proyecto.
