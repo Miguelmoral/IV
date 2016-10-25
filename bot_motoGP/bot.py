@@ -54,7 +54,6 @@ def command_fecha(m):
 
 @bot.message_handler(commands=['resultados'])
 def command_resultados(m):
-    print m
     cid = m.chat.id
     anio = m.text[12:16] # Definimos el tamaño que va a tener anio y le asignamos el valor que le pasamos por parámetros
     pais = m.text[17:20]
