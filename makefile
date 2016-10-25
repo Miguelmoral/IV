@@ -1,6 +1,6 @@
 
 install:
-	sudo pip install -r requirements.txt
+	pip install -r requirements.txt
 
 test:
 	cd bot_motoGP && python tests.py
