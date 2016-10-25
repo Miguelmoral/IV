@@ -20,29 +20,6 @@ def listener(messages): # Con esto, estamos definiendo una función llamada 'lis
 def command_carreras(m):
     cid = m.chat.id # Guardamos el ID de la conversación para poder responder.
     cadena = "Posibles carreras para seleccionar:" + "\n"
-    #frases ={0:"Losail International Circuit QAT",
-    #1:"Termas de Río Hondo ARG",
-    #2:"Circuit Of The Americas AME",
-    #3:"Circuito de Jerez SPA",
-    #4:"Le Mans FRA",
-    #5:"Autodromo del Mugello ITA",
-    #6:"Circuit de Barcelona-Catalunya CAT",
-    #7:"TT Circuit Assen NED",
-    #8:"Sachsenring GER",
-    #9:"Red Bull Ring – Spielberg AUT",
-    #10:"Automotodrom Brno CZE",
-    #11:"Silverstone Circuit GBR",
-    #12:"Misano World Circuit Marco Simoncelli RSM",
-    #13:"MotorLand Aragon ARA",
-    #14:"Twin Ring Motegi JPN",
-    #15:"Phillip Island AUS",
-    #16:"Sepang International Circuit MAL",
-    #17:"Comunitat Valenciana - Ricardo Tormo VAL"
-    #}
-
-    #for i in range(17):
-    #    cadena += "-" + frases[i] + "\n"
-    #bot.send_message(cid,cadena)
 
     con_bd = sqlite3.connect('gp.db')
     cursor_gp = con_bd.cursor()
@@ -84,12 +61,6 @@ def command_resultados(m):
     sesion = m.text[21:]
     cadena = " "
     contador = 1
-
-    if not anio:
-        anio = "2015"
-        pais = "ARA"
-
-
 
     #-------------------------------------------------Comprobación de errores--------------------------------#
     if not anio.isnumeric():
