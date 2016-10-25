@@ -1,4 +1,4 @@
-# IV
+# IV- Bot de telegram para consultar los resultados de las sesiones de moto GP
 
 ## Proyecto a realizar
 
@@ -12,3 +12,13 @@ Se va a llevar a cabo la realización de un bot de Telegram para ver informació
 - Servidor de base de datos.
 - Despliege en la nube.
 - Monitorización.
+
+## Como usar:
+
+Para ejecutar el bot introduciremos `python bot.py` , una vez que el bot se está ejecutando podremos introducir los siguientes comandos:
+
+- `/carreras`  #Devolverá una lista con las carreras disponibles y su correspondiente código que nos servirá para el comando /resultados
+- `/resultados AÑO COD_CARRERA SESION` #Con este comando el bot nos mostrará los resultados en el año y carrera seleccionados, opcionalmente se podrá pasar el argumento sesión(Q1,Q2), en caso de dejar el espacio en blando por defecto mostrará los resultados de la sesión carrera.
+
+
+
