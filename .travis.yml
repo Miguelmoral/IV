@@ -1,11 +1,14 @@
 language: python
 python:
- - "2.7"
+  - "2.7"
 
+# command to install dependencies
 install:
- - sudo apt-get install python-dev
- - pip install --upgrade pip 
- - pip install Django 
+  - pip install pyTelegramBotAPI
+  - distribute==0.6.24
+  - py==1.4.31
+  - pyTelegramBotAPI==2.1.7
+  - requests==2.11.1
 
-script:
- - python manage.py test
+# command to run tests
+script: make test
