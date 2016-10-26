@@ -113,6 +113,13 @@ ejecutar:
 
 Como la aplicación utiliza un token el cuál no está incluido en el código por motivos de privacidad, tendremos que crearnos en Travis una variable de entorno con dicho token para que pueda ejecutar nuestra aplicación. Esta opción de añadir una variable de entorno la encontraremos en el apartado settings del repositorio que deseemos dentro de la web de Travis.
 
+Una vez subamos nuestro proyecto a github y habilitemos en travis ese repositorio empezará a ejecutar los test mostrándonos lo siguiente:
+
+![imagenTravis](http://i66.tinypic.com/116mj9t.png)
+
+Si todo está correcto y se pasa el test travis nos mostrará lo siguiente 
+
+[![Build Status](https://travis-ci.org/Miguelmoral/IV.svg?branch=master)](https://travis-ci.org/Miguelmoral/IV)
 
 
 
