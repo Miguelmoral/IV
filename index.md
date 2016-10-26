@@ -2,7 +2,7 @@
 layout: index
 ---
 
-### Práctica 0
+## Práctica 0
 
 ## 1-Creación de una llave ssh y añadir esta a github:
 Creación de claves ssh:
@@ -49,7 +49,7 @@ Una vez creemos estos archivos en local los subiremos mediante git con los sigui
 `git push origin hito0`
 
 
-### Primer hito: Estructuración del proyecto
+## Primer hito: Estructuración del proyecto
 
 ### Prerrequisitos
 - [x]Tener aprobado el hito 0 de proyecto.
@@ -68,4 +68,53 @@ Se va a llevar a cabo la realización de un bot de Telegram para ver informació
 - Servidor de base de datos.
 - Despliege en la nube.
 - Monitorización.
+
+## Segundo hito:
+
+### Descripción del proyecto:
+
+El proyecto sobre el que se van a realizar lso tests de integración continua es un bot de telegram al cuál le podremos consultar los resultados de distintas sesiones y este bot nos responderá con esta información.
+
+### Prerrequisitos:
+
+Haber alcanzado el 80% de los objetivos del tema introductorio tras haber realizado los ejercicios propuestos [ejercicios](https://github.com/Miguelmoral/IVejercicios/blob/master/tema2.md).
+
+### Integración continua:
+
+En esta práctica he utilizado travis CI para realizar los test de integración continua, para que travis analice nuestro repositorio tendremos que incluir un fichero .travis.yml cuyo contenido ha de ser parecido al siguiente:
+
+```
+language: python
+python:
+  - "2.7"
+
+# command to install dependencies
+install: make install
+
+# command to run tests
+script: make test
+
+```
+
+Para que nos funcione tendremos que hacer un Makefile de este estilo:
+
+```
+
+install:
+	pip install -r requirements.txt
+
+test:
+	cd bot_motoGP && python tests.py
+
+ejecutar:
+	cd bot_MotoGP && python bot.py
+
+```
+
+Como la aplicación utiliza un token el cuál no está incluido en el código por motivos de privacidad, tendremos que crearnos en Travis una variable de entorno con dicho token para que pueda ejecutar nuestra aplicación. Esta opción de añadir una variable de entorno la encontraremos en el apartado settings del repositorio que deseemos dentro de la web de Travis.
+
+
+
+
+
 
