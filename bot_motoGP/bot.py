@@ -6,6 +6,10 @@ import random
 import datetime
 import os
 import sqlite3
+import modules
+from bs4 import BeautifulSoup
+import requests
+import types
 
 
 bot = telebot.TeleBot(os.environ["TOKENMOTOGP"]) # Creamos el objeto de nuestro bot.
@@ -62,25 +66,11 @@ def command_resultados(m):
     contador = 1
 
     #-------------------------------------------------Comprobación de errores--------------------------------#
-    if not anio.isnumeric():
-        bot.send_message(cid, "La fecha introducida ha de ser un numero")
-    elif anio > "2016":
-        bot.send_message(cid, "Fecha incorrecta, tiene que introducir un año menor que 2016")
-    elif anio < "2002":
-        bot.send_message(cid, "Fecha incorrecta, tiene que introducir un año mayor que 2002")
-    elif pais.isnumeric():
-        bot.send_message(cid, "La carrera introducida ha de ser un código de 3 letras. Vease comando /carreras")
+    resmen= modules.comprobacion_errores(anio,pais)
+    if type(resmen) != types.BooleanType:
+        bot.send_message(cid, resmen)
     else:
-
-        from bs4 import BeautifulSoup
-        import requests
-
-        cadenaurl = "http://www.motogp.com/es/ajax/results/parse/" + str(anio) + "/" + str(pais) +"/MotoGP/" + str(sesion)
-
-        url = cadenaurl
-        # Realizamos la petición a la web
-        req = requests.get(url)
-
+        req = modules.get_url(anio,pais,sesion)
         statusCode = req.status_code
         htmlText = req.text
 
