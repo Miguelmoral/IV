@@ -5,6 +5,10 @@ import sys
 import modules
 import types
 import psycopg2
+import urlparse
+
+urlparse.uses_netloc.append("postgres")
+url = urlparse.urlparse(os.environ["DATABASE_URL"])
 
 anio = unicode('2015', 'utf-8')
 pais = unicode('ARA', 'utf-8')
