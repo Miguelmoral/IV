@@ -4,6 +4,7 @@ import sqlite3 as lite
 import sys
 import modules
 import types
+import psycopg2
 
 anio = unicode('2015', 'utf-8')
 pais = unicode('ARA', 'utf-8')
@@ -11,13 +12,16 @@ sesion = unicode('Q2', 'utf-8')
 
 class Test(unittest.TestCase):
     def test_motogp(self):
-        con = lite.connect('gp.db')
+        con = psycopg2.connect(database='motogpbot',user='miguel',password='miguel',host='localhost')
         with con:
             cur = con.cursor()
-            cur.execute("INSERT INTO CARRERAS VALUES('AAA', 'Circuito Aragón')")
-            lid = cur.lastrowid #Devuelve el id de la uĺtima fila
-            cur.execute("DELETE FROM CARRERAS WHERE CODIGO = 'AAA'")
-            self.assertEqual(lid, 19)
+            valor2 = 'Circuito Aragón'
+            valor1 = 'AAA'
+            valor = ('ARA', )
+            cur.execute("SELECT id FROM datos WHERE id=%s", valor)
+            #cur.execute("DELETE FROM datos WHERE id=%s" , valor1)
+            self.assertEqual(cur.fetchone()[0], 'ARA       ')
+
 
     def test_errores(self):
         modules.comprobacion_errores(anio, pais)

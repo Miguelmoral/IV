@@ -10,6 +10,12 @@ import modules
 from bs4 import BeautifulSoup
 import requests
 import types
+import psycopg2
+import urlparse
+
+urlparse.uses_netloc.append("postgres")
+url = urlparse.urlparse(os.environ["DATABASE_URL"])
+
 
 
 bot = telebot.TeleBot(os.environ["TOKENMOTOGP"]) # Creamos el objeto de nuestro bot.
@@ -25,14 +31,29 @@ def command_carreras(m):
     cid = m.chat.id # Guardamos el ID de la conversación para poder responder.
     cadena = "Posibles carreras para seleccionar:" + "\n"
 
-    con_bd = sqlite3.connect('gp.db')
-    cursor_gp = con_bd.cursor()
-    cursor_gp.execute("SELECT * FROM CARRERAS")
-    for registro in cursor_gp:
-        cadena += str(registro) + "\n"
+    try:
+        # con_bd = psycopg2.connect(database='d8jve0c750bc8r',user='hhggnmpsqdfffc',password='1L0f3Z5j4niLnOrtNo-qKnbjig',host='ec2-50-17-220-39.compute-1.amazonaws.com')
+        #con_bd = psycopg2.connect(database='motogpbot',user='miguel',password='miguel',host='localhost')
+        con_bd = psycopg2.connect(
+            database=url.path[1:],
+            user=url.username,
+            password=url.password,
+            host=url.hostname,
+            port=url.port
+        )
+        cur = con_bd.cursor()
+    	cur.execute("SELECT * FROM datos")
+        rows = cur.fetchall()
+        for row in rows:
+            cadena += row[0] + row[1] + "\n"
+    	cur.close()
+    	con_bd.close()
+    except:
+        cadena = "No se puede conectar a la bd"
+
+
     bot.send_message(cid,cadena)
-    cursor_gp.close()
-    con_bd.close()
+
 
 @bot.message_handler(commands=['fecha'])
 def command_fecha(m):
