@@ -18,7 +18,7 @@ sesion = unicode('Q2', 'utf-8')
 class Test(unittest.TestCase):
     def test_motogp(self):
         #con = psycopg2.connect(database='motogpbot',user='miguel',password='miguel',host='localhost')
-        con_bd = psycopg2.connect(
+        con = psycopg2.connect(
             database=url.path[1:],
             user=url.username,
             password=url.password,
