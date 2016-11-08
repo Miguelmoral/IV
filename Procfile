@@ -1,1 +1,1 @@
-web: python bot_motoGP/bot.py
+worker: python bot_motoGP/bot.py
