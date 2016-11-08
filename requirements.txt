@@ -5,4 +5,4 @@ python-telegram-bot==5.1.0
 requests==2.11.1
 sqlparse==0.1.18
 urllib3==1.18
-
+psycopg2==2.6.2
