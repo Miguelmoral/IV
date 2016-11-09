@@ -28,7 +28,7 @@ def listener(messages): # Con esto, estamos definiendo una función llamada 'lis
 
 @bot.message_handler(commands=['start'])
 def command_start(m):
-    cid = message.chat.id # Guardamos el ID de la conversacion para poder responder.
+    cid = m.chat.id # Guardamos el ID de la conversación para poder responder.
 	bot.send_message(cid, "Introduzca uno de los comandos aquí especificados\nListado de comandos: \n-/carreras -> Devolverá una lista con todas las posibles carreras sobre las que hacer una consulta con el correspondiente código el cuál tendremos que utilizar para realizar la consulta\n- /resultados año codigo_carrera sesion -> Con este comando podremos consultar los resultados de una determinada carrera introduciendo los parámetros año (ej: 2015) coódigo de la carrera (ej: ARA) sesión (Este parámetro es opcional si se deja en blanco mostrá los resultados de la carrera ej:Q2)\nUn ejemplo de uso para el comando /resultados seria:\n/resultados 2015 ARA Q2 -> Este comando nos devolverá los resultados del gran premio de aragón de 2015 en la sesión Q2")
 
 
