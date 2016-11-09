@@ -32,7 +32,7 @@ class Test(unittest.TestCase):
             valor = ('ARA', )
             cur.execute("SELECT id FROM datos WHERE id=%s", valor)
             #cur.execute("DELETE FROM datos WHERE id=%s" , valor1)
-            self.assertEqual(cur.fetchone()[0], 'ARA  ')
+            self.assertEqual(cur.fetchone()[0], 'ARA')
 
 
     def test_errores(self):
