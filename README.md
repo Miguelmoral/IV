@@ -3,6 +3,7 @@
 ## Proyecto a realizar
 
 [![Build Status](https://travis-ci.org/Miguelmoral/IV.svg?branch=master)](https://travis-ci.org/Miguelmoral/IV)
+[![Heroku Deploy](https://www.herokucdn.com/deploy/button.svg)](https://lit-spire-74429.herokuapp.com/) 
 
 Se va a llevar a cabo la realización de un bot de Telegram para ver información sobre los grandes premios de Moto GP pudiendo hacer consultas de posición de los pilotos o tiempos de estos en distintos grandes premios que se hayan corrido. Para ello se hará uso del web scraping sacando de está forma los datos que nos sean útiles. La web que he elegido para coger la información es esta en concreto ya que el formato no varia, tan solo cambia para los grandes premios que se han corrido en 2016 pero ese problema se puede solucionar de forma facil ya que todos los grandes premios de 2016 tienen el mismo formato entre ellos.
 
@@ -68,6 +69,39 @@ Para ejecutar el bot introduciremos `python bot.py` , una vez que el bot se est�
 
 - `/carreras`  #Devolverá una lista con las carreras disponibles y su correspondiente código que nos servirá para el comando /resultados
 - `/resultados AÑO COD_CARRERA SESION` #Con este comando el bot nos mostrará los resultados en el año y carrera seleccionados, opcionalmente se podrá pasar el argumento sesión(Q1,Q2), en caso de dejar el espacio en blando por defecto mostrará los resultados de la sesión carrera.
+
+### Despliegue en un pass:
+
+Para el despliegue me he decidido por utilizar Heroku para desplegar mi aplicación. Una vez nos registremos en la web Heroku tendremos que crear un nuevo proyecto y una base de datos asociada a este, para ello ejecutaremos los siguientes comandos, para la creación de la aplicación `heroku create` y para la creación de la base de datos `heroku addons:create heroku-postgresql:hobby-basic` . Podremos ver en la web de Heroku que tanto la aplicación como la base de datos están correctamente creadas. El siguiente paso será enlazar nuestra cuenta de github con Heroku. Para ello tan solo tendremos que acceder a account settings y activarlo
+
+![heroku-github](http://i64.tinypic.com/13z4rnp.png)
+
+Una vez hecho tendremos que seleccionar el repositorio de GitHub que queremos enlazar con Heroku para que nuestra app se suba de forma correcta.
+Podremos gestionar la base de datos que hemos creado en Heroku desde la terminal de nuestro PC, para ello necesitaremos acceder a las credenciales de nuestra base de datos, en la sección databases podremos acceder a la información de todas las bases de datos que tengamos creadas (En caso de estar trabajando con una cuenta gratuita sin introducir tarjeta de crédito el número máximo tanto de aplicaciones como de bases de datos será 4). Esta es toda la información que nos aporta Heroku sobre las bases de datos, para conectarnos a ella tendriamos que introducir un comando especificado en las credenciales (en la captura no se muestran las credenciales por motivos de seguridad)
+
+![imagendb](http://i68.tinypic.com/dm8uoh.png)
+
+En este momento tenemos nuestra aplicación de github enlazada con Heroku tan solo nos quedaría crear un archivo Procfile para la ejecución en Heroku en nuestro repositorio con el siguiente contenido:
+
+```
+worker: python bot_motoGP/bot.py
+
+```
+Además tendremos que declarar tanto en Heroku como en TravisCI las variables de entorno con el Token del bot de Telegram como el de la DATABASE_URL para poder acceder a la DB creada en Heroku que está enlazada con el proyecto de Heroku.
+
+El último paso será configurar en Heroku que se realice el deploy tan solo cuando se pasen correctamente los test unitarios para ello nos tendremos que dirigir a la sección deploy de nuestra aplicación, una vez que la tenemos configurada correctamente debería tener un aspecto similar a este:
+
+![finalapp](http://i67.tinypic.com/x4kisy.png)
+
+Una vez que se evaluen los test unitarios de nuestra aplicación en TravisCI en mi caso veremos como nuestra aplicación se despliega en Heroku:
+
+![deployapp](http://i64.tinypic.com/2wcfwxt.png)
+
+En este momento nuesto bot esta desplegado y es totalmente funcional. Podemos ver los logs introduciendo en la carpeta donde se encuentre nuestro bot el comando`heroku logs --tail` y podemos ver como ejecuta los comandos que queramos sin nigún problema además de estar funcionando el bot.
+
+![logs](http://i67.tinypic.com/fbjau1.png)
+
+
 
 
 
