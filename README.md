@@ -101,6 +101,8 @@ En este momento nuesto bot esta desplegado y es totalmente funcional. Podemos ve
 
 ![logs](http://i67.tinypic.com/fbjau1.png)
 
+Podremos ver que el bot funcina perfectamente hablándole (alias del bot @Prueba567_bot)
+
 
 
 
