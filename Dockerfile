@@ -19,4 +19,6 @@ RUN sudo pip install --upgrade pip
 
 ENV TOKEN="270820377:AAE8J3ISnM9LQUOl2dViqTHpRe_4w75LDW0"
 
+RUN cd IV/ && make install
+
 CMD cd /home/iv && cd bot_motoGP && python bot.py
