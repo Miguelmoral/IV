@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:14.04
 MAINTAINER Miguel Moral Llamas <miguelmoralllamas@correo.ugr.es>
 #instalamos git
 RUN apt-get -y update
