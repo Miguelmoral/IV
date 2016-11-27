@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:latest
 MAINTAINER Miguel Moral Llamas <miguelmoralllamas@correo.ugr.es>
 #instalamos git
 RUN apt-get -y update
