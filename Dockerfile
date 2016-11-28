@@ -17,7 +17,8 @@ RUN sudo apt-get -y install libpq-dev
 RUN sudo easy_install3 pip
 RUN sudo pip install --upgrade pip
 
-ENV TOKEN="270820377:AAE8J3ISnM9LQUOl2dViqTHpRe_4w75LDW0"
+ENV TOKENMOTOGP="270820377:AAE8J3ISnM9LQUOl2dViqTHpRe_4w75LDW0"
+ENV DATABASE_URL="postgres://duhfjfoqfomzvy:WSWZd5PeQ8wGCkIyYF-rwlFiEn@ec2-23-23-76-90.compute-1.amazonaws.com:5432/de7bsh4d838oe1"
 
 RUN cd IV/ && make install
 
