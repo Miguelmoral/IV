@@ -1,5 +1,11 @@
 FROM ubuntu:14.04
 MAINTAINER Miguel Moral Llamas <miguelmoralllamas@correo.ugr.es>
+ARG TOKENMOTOGP
+ARG DATABASE_URL
+
+ENV TOKENMOTOGP="270820377:AAE8J3ISnM9LQUOl2dViqTHpRe_4w75LDW0"
+ENV DATABASE_URL="postgres://duhfjfoqfomzvy:WSWZd5PeQ8wGCkIyYF-rwlFiEn@ec2-23-23-76-90.compute-1.amazonaws.com:5432/de7bsh4d838oe1"
+
 #instalamos git
 RUN apt-get -y update
 RUN apt-get install -y git
@@ -17,7 +23,6 @@ RUN sudo apt-get -y install libpq-dev
 RUN sudo easy_install pip
 RUN sudo pip install --upgrade pip
 
-ENV TOKENMOTOGP="270820377:AAE8J3ISnM9LQUOl2dViqTHpRe_4w75LDW0"
-ENV DATABASE_URL="postgres://duhfjfoqfomzvy:WSWZd5PeQ8wGCkIyYF-rwlFiEn@ec2-23-23-76-90.compute-1.amazonaws.com:5432/de7bsh4d838oe1"
+
 
 RUN cd IV/ && make install
