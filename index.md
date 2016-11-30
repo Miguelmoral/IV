@@ -193,9 +193,9 @@ Tendremos que hacer click en create automated build y automáticamente cogerá n
 
 ![docker](http://i67.tinypic.com/33zd6s7.png)
 
-En este momento podremos ejecutar la imagen con los siguientes comandos `sudo docker pull miguemoral/iv` y `sudo docker run -e "TOKENMOTOGP=270820377:AAE8J3ISnM9LQUOl2dViqTHpRe_4w75LDW0" -e "DATABASE_URL=postgres://duhfjfoqfomzvy:WSWZd5PeQ8wGCkIyYF-rwlFiEn@ec2-23-23-76-90.compute-1.amazonaws.com:5432/de7bsh4d838oe1" -i -t miguelmoral/iv /bin/bash`
+En este momento podremos ejecutar la imagen con los siguientes comandos `sudo docker pull miguemoral/iv` y `sudo docker run -e "TOKENMOTOGP=INTRODUCIR_TOKEN_DEL_BOT" -e "DATABASE_URL=INTRODUCIR_URL_DE_LA_BD" -i -t miguelmoral/iv /bin/bash`
 
-Una ven dentro de la máquina tendremos que dirigirnos al directorio IV y ejecutar `make ejecutar`
+Una vez dentro de la máquina tendremos que dirigirnos al directorio IV y ejecutar `make ejecutar`
 
 Enlace a dockers [![Docker](https://camo.githubusercontent.com/8a4737bc02fcfeb36a2d7cfb9d3e886e9baf37ad/687474703a2f2f693632382e70686f746f6275636b65742e636f6d2f616c62756d732f7575362f726f6d696c67696c646f2f646f636b657269636f6e5f7a7073776a3369667772772e706e67)](https://hub.docker.com/r/miguelmoral/iv/)
 
