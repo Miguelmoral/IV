@@ -4,6 +4,7 @@
 
 [![Build Status](https://travis-ci.org/Miguelmoral/IV.svg?branch=master)](https://travis-ci.org/Miguelmoral/IV)
 [![Heroku Deploy](https://www.herokucdn.com/deploy/button.svg)](https://lit-spire-74429.herokuapp.com/) 
+[![Docker](https://camo.githubusercontent.com/8a4737bc02fcfeb36a2d7cfb9d3e886e9baf37ad/687474703a2f2f693632382e70686f746f6275636b65742e636f6d2f616c62756d732f7575362f726f6d696c67696c646f2f646f636b657269636f6e5f7a7073776a3369667772772e706e67)](https://hub.docker.com/r/miguelmoral/iv/)
 
 Se va a llevar a cabo la realización de un bot de Telegram para ver información sobre los grandes premios de Moto GP pudiendo hacer consultas de posición de los pilotos o tiempos de estos en distintos grandes premios que se hayan corrido. Para ello se hará uso del web scraping sacando de está forma los datos que nos sean útiles. La web que he elegido para coger la información es esta en concreto ya que el formato no varia, tan solo cambia para los grandes premios que se han corrido en 2016 pero ese problema se puede solucionar de forma facil ya que todos los grandes premios de 2016 tienen el mismo formato entre ellos.
 
@@ -102,6 +103,18 @@ En este momento nuesto bot esta desplegado y es totalmente funcional. Podemos ve
 ![logs](http://i67.tinypic.com/fbjau1.png)
 
 Podremos ver que el bot funcina perfectamente hablándole (alias del bot @Prueba567_bot)
+
+### Entorno de pruebas:
+
+Para descargar el contenedor de docker tendremos que ejecutar:
+- `sudo docker pull miguemoral/iv`
+- `sudo docker run -e "TOKENMOTOGP=INTRODUCIR_TOKEN_DEL_BOT" -e "DATABASE_URL=INTRODUCIR_URL_DE_LA_BD" -i -t miguelmoral/iv /bin/bash`
+
+Una vez estemos dentro:
+- `cd IV`
+- `make ejecutar`
+
+
 
 
 
