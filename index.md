@@ -121,6 +121,84 @@ Si todo está correcto y se pasa el test travis nos mostrará lo siguiente
 
 [![Build Status](https://travis-ci.org/Miguelmoral/IV.svg?branch=master)](https://travis-ci.org/Miguelmoral/IV)
 
+### Despliegue en un pass:
+
+Para el despliegue me he decidido por utilizar Heroku para desplegar mi aplicación. Una vez nos registremos en la web Heroku tendremos que crear un nuevo proyecto y una base de datos asociada a este, para ello ejecutaremos los siguientes comandos, para la creación de la aplicación `heroku create` y para la creación de la base de datos `heroku addons:create heroku-postgresql:hobby-basic` . Podremos ver en la web de Heroku que tanto la aplicación como la base de datos están correctamente creadas. El siguiente paso será enlazar nuestra cuenta de github con Heroku. Para ello tan solo tendremos que acceder a account settings y activarlo
+
+![heroku-github](http://i64.tinypic.com/13z4rnp.png)
+
+Una vez hecho tendremos que seleccionar el repositorio de GitHub que queremos enlazar con Heroku para que nuestra app se suba de forma correcta.
+Podremos gestionar la base de datos que hemos creado en Heroku desde la terminal de nuestro PC, para ello necesitaremos acceder a las credenciales de nuestra base de datos, en la sección databases podremos acceder a la información de todas las bases de datos que tengamos creadas (En caso de estar trabajando con una cuenta gratuita sin introducir tarjeta de crédito el número máximo tanto de aplicaciones como de bases de datos será 4). Esta es toda la información que nos aporta Heroku sobre las bases de datos, para conectarnos a ella tendriamos que introducir un comando especificado en las credenciales (en la captura no se muestran las credenciales por motivos de seguridad)
+
+![imagendb](http://i68.tinypic.com/dm8uoh.png)
+
+En este momento tenemos nuestra aplicación de github enlazada con Heroku tan solo nos quedaría crear un archivo Procfile para la ejecución en Heroku en nuestro repositorio con el siguiente contenido:
+
+```
+worker: python bot_motoGP/bot.py
+
+```
+Además tendremos que declarar tanto en Heroku como en TravisCI las variables de entorno con el Token del bot de Telegram como el de la DATABASE_URL para poder acceder a la DB creada en Heroku que está enlazada con el proyecto de Heroku.
+
+El último paso será configurar en Heroku que se realice el deploy tan solo cuando se pasen correctamente los test unitarios para ello nos tendremos que dirigir a la sección deploy de nuestra aplicación, una vez que la tenemos configurada correctamente debería tener un aspecto similar a este:
+
+![finalapp](http://i67.tinypic.com/x4kisy.png)
+
+Una vez que se evaluen los test unitarios de nuestra aplicación en TravisCI en mi caso veremos como nuestra aplicación se despliega en Heroku:
+
+![deployapp](http://i64.tinypic.com/2wcfwxt.png)
+
+En este momento nuesto bot esta desplegado y es totalmente funcional. Podemos ver los logs introduciendo en la carpeta donde se encuentre nuestro bot el comando`heroku logs --tail` y podemos ver como ejecuta los comandos que queramos sin nigún problema además de estar funcionando el bot.
+
+![logs](http://i67.tinypic.com/fbjau1.png)
+
+Podremos ver que el bot funcina perfectamente hablándole (alias del bot @Prueba567_bot)
+
+En primer lugar tedremos que hacer un documento Dockerfile como este en nuestro repositorio de github:
+
+```
+FROM ubuntu:14.04
+MAINTAINER Miguel Moral Llamas <miguelmoralllamas@correo.ugr.es>
+ARG TOKENMOTOGP
+ARG DATABASE_URL
+
+ENV TOKENMOTOGP=$TOKENMOTOGP
+ENV DATABASE_URL=$DATABASE_URL
+
+#instalamos git
+RUN apt-get -y update
+RUN apt-get install -y git
+
+#Clonamos repositorio
+RUN sudo git clone https://github.com/Miguelmoral/IV
+
+#Instalamos herramientas
+RUN sudo apt-get -y update
+RUN sudo apt-get install -y python-setuptools
+RUN sudo apt-get -y install python-dev
+RUN sudo apt-get -y install build-essential
+RUN sudo apt-get -y install python-psycopg2
+RUN sudo apt-get -y install libpq-dev
+RUN sudo easy_install pip
+RUN sudo pip install --upgrade pip
+
+
+
+RUN cd IV/ && make install
+```
+
+A continuación tendremos que registrarnos en docker hub si no tenemos cuenta y enlazarla con nuestro github.
+
+Tendremos que hacer click en create automated build y automáticamente cogerá nuestro archivo dockerfile. Si todo ha salido correctamente nos mostrará lo siguiente en la web de docker hub:
+
+![docker](http://i67.tinypic.com/33zd6s7.png)
+
+En este momento podremos ejecutar la imagen con los siguientes comandos `sudo docker pull miguemoral/iv` y `sudo docker run -e "TOKENMOTOGP=270820377:AAE8J3ISnM9LQUOl2dViqTHpRe_4w75LDW0" -e "DATABASE_URL=postgres://duhfjfoqfomzvy:WSWZd5PeQ8wGCkIyYF-rwlFiEn@ec2-23-23-76-90.compute-1.amazonaws.com:5432/de7bsh4d838oe1" -i -t miguelmoral/iv /bin/bash`
+
+Una ven dentro de la máquina tendremos que dirigirnos al directorio IV y ejecutar `make ejecutar`
+
+Enlace a dockers [![Docker](https://camo.githubusercontent.com/8a4737bc02fcfeb36a2d7cfb9d3e886e9baf37ad/687474703a2f2f693632382e70686f746f6275636b65742e636f6d2f616c62756d732f7575362f726f6d696c67696c646f2f646f636b657269636f6e5f7a7073776a3369667772772e706e67)](https://hub.docker.com/r/miguelmoral/iv/)
+
 
 
 
