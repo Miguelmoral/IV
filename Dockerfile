@@ -23,6 +23,4 @@ RUN sudo apt-get -y install libpq-dev
 RUN sudo easy_install pip
 RUN sudo pip install --upgrade pip
 
-
-
 RUN cd IV/ && make install
