@@ -1,0 +1,33 @@
+---
+- hosts: default
+  remote_user: miguel
+  sudo: yes
+  vars:
+   TOKENMOTOGP: "{{ lookup('env','TOKENMOTOGP') }}"
+   DATABASE_URL: "{{ lookup('env','DATABASE_URL')}}
+  tasks:
+  - name: Update
+    command: apt-get update
+  - name: essential
+    command: apt-get install -y build-essential
+  - name: Install git
+    command: apt-get install -y git
+  - name: Instalar pip
+    apt: name=python-pip state=present
+  - name: Instalar paquetes necesarios
+    apt: name=python-setuptools state=present
+    apt: name=python-dev state=present
+    apt: name=libgdbm-dev state=present
+    apt: name=libncurses5-dev state=present
+    apt: name=postgresql state=present
+    apt: name=postgresql-contrib state=present
+    apt: name=libpq-dev state=present
+  - name: Clone
+    shell: rm -rf proyectoIV && git clone https://github.com/Miguelmoral/IV
+  - name: Actualizar pip
+    command: pip install -y -U pip
+    command: sudo apt-get install -y python-dev
+  - name: Instalar requirements
+    command: sudo pip install -r IV/requirements.txt
+  - name: Execution
+    shell: cd IV && python bot_motoGP/bot.py
