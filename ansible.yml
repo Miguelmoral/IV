@@ -23,7 +23,7 @@
     apt: name=postgresql-contrib state=present
     apt: name=libpq-dev state=present
   - name: Clone
-    shell: rm -rf proyectoIV && git clone https://github.com/Miguelmoral/IV
+    shell: rm -rf IV && git clone https://github.com/Miguelmoral/IV
   - name: Actualizar pip
     command: pip install -y -U pip
     command: sudo apt-get install -y python-dev
