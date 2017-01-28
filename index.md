@@ -2,6 +2,11 @@
 layout: index
 ---
 
+[![Build Status](https://travis-ci.org/Miguelmoral/IV.svg?branch=master)](https://travis-ci.org/Miguelmoral/IV)
+[![Heroku Deploy](https://www.herokucdn.com/deploy/button.svg)](https://lit-spire-74429.herokuapp.com/)
+[![Docker](https://camo.githubusercontent.com/8a4737bc02fcfeb36a2d7cfb9d3e886e9baf37ad/687474703a2f2f693632382e70686f746f6275636b65742e636f6d2f616c62756d732f7575362f726f6d696c67696c646f2f646f636b657269636f6e5f7a7073776a3369667772772e706e67)](https://hub.docker.com/r/miguelmoral/iv/)
+[![Azure](https://camo.githubusercontent.com/9285dd3998997a0835869065bb15e5d500475034/687474703a2f2f617a7572656465706c6f792e6e65742f6465706c6f79627574746f6e2e706e67)](http://botmotogp.cloudapp.net)
+
 ## Práctica 0
 
 ## 1-Creación de una llave ssh y añadir esta a github:
@@ -201,6 +206,82 @@ En este momento podremos ejecutar la imagen con los siguientes comandos `sudo do
 Una vez dentro de la máquina tendremos que dirigirnos al directorio IV y ejecutar `make ejecutar`
 
 Enlace a dockers [![Docker](https://camo.githubusercontent.com/8a4737bc02fcfeb36a2d7cfb9d3e886e9baf37ad/687474703a2f2f693632382e70686f746f6275636b65742e636f6d2f616c62756d732f7575362f726f6d696c67696c646f2f646f636b657269636f6e5f7a7073776a3369667772772e706e67)](https://hub.docker.com/r/miguelmoral/iv/)
+
+### Despliegue en un IAAS:
+
+Para este despliegue he elegido Azure haciendo uso de una de las claves de acceso de forma gratuita que proporciono el profesor.
+Tras registrarnos en Azure con dicha clave y nuestro correo de tipo hotmail podremos acceder a Azure desde el navegador pero para poder tener acceso desde una terminal tendremos que generar un certificado que firmaremos nosotros mismos de la siguiente forma:
+
+```
+openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout nombre_certuficado.pem -out nombre_certificado.pem
+
+openssl x509 -inform pem -in nombre_certificado.pem -outform der -out nombre_certificado.cer
+
+chmod 600 nombre_certificado.pem
+```
+
+![pase](http://i66.tinypic.com/ih0e8h.png)
+
+Tendremos que acceder además a nuestra cuenta Azure desde el navegador para poder subir el archivo .cer que hemos generado.
+
+Tras este procedimiento en Azure tendremos que instalar lo siguiente:
+- Instalar vagrant ejecutando: `sudo apt-get -y install vagrant`
+- Instalar ansible: `apt-get install ansible`
+- Instalar plugin Azure: `vagrant plugin install vagrant-azure`
+
+El siguiente paso será generar un archivo Vagrantfile en la carpeta que deseemos `vagrant init`
+
+Modificaremos a nuestra medida el fichero Vagrantfile el cuál llamará al fichero ansible.yml los cuales se encargarán del despliegue de la máquina.
+
+Para el despliegue de la máquina en Azure utilizaremos el comando `vagrant up --provider=azure`
+
+![imgazure](http://i67.tinypic.com/2v16gl4.png)
+
+#### Gestionar la máquina desplegada:
+
+Para este propósito se hará uso de Fabric, por lo que tendremos que general el correspondiente archivo fabfile.py con las órdenes que queramos ejecutar. Una vez tengamos creado este archivo tan solo nos quedará ejecutar en terminal `fab -p 0123456789Contrasenia! -H botMotoGp@botmotogp.cloudapp.net comando_de_fabfile`
+
+#### Uso nohub con fabric:
+
+Para poder ejecutar en segundo plano nuestro bot y que siga funcionando aún cuando cerremos la terminal haremos uso de nohub creando una funcion en el archivo fabfile.p a la que le tendremos que pasar además los token privados quedando de la siguiente manera:
+
+```
+def demoniohup():
+    with shell_env(TOKENMOTOGP=os.environ['TOKENMOTOGP'], DATABASE_URL=os.environ['DATABASE_URL']):
+        run ('nohup python IV/bot_motoGP/bot.py >& /dev/null &',pty=False)
+
+```
+
+#### Uso automatizado:
+
+Todo esto lo tendremos automatizado en un script llamado despliege.sh con el que tan solo ejecutando en un terminal `./despliege.sh` podremos desplegarlo todo con tan solo una orden.
+El script tendra el siguiente aspecto:
+
+```
+
+#!/bin/bash
+
+sudo apt-get update
+
+# Instalación de vagrant
+wget https://releases.hashicorp.com/vagrant/1.8.7/
+sudo dpkg -i vagrant_1.8.7_x86_64.deb
+# Instalar plugin para azure
+sudo vagrant plugin install vagrant-azure
+
+# Instalación Ansible
+sudo apt-get install ansible
+
+
+# Despliegue en Azure
+sudo vagrant up --provider=azure
+
+# Despliegue de la aplicación con Fabric
+sudo pip install fabric
+# Actualiza el supervisor
+fab -p '0123456789Contrasenia!' -H miguel@botmotogp.cloudapp.net demoniohup
+
+```
 
 
 
