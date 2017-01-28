@@ -4,7 +4,7 @@
   sudo: yes
   vars:
    TOKENMOTOGP: "{{ lookup('env','TOKENMOTOGP') }}"
-   DATABASE_URL: "{{ lookup('env','DATABASE_URL')}}
+   DATABASE_URL: "{{ lookup('env','DATABASE_URL')}}"
   tasks:
   - name: Update
     command: apt-get update
@@ -22,6 +22,10 @@
     apt: name=postgresql state=present
     apt: name=postgresql-contrib state=present
     apt: name=libpq-dev state=present
+  - name: Instalar supervisor
+    command: pip install supervisor
+  - name: Configurar supervisor
+    template: src=bot_motoGP.conf dest=/etc/supervisor/conf.d/bot_motoGP.conf
   - name: Clone
     shell: rm -rf IV && git clone https://github.com/Miguelmoral/IV
   - name: Actualizar pip
@@ -29,5 +33,5 @@
     command: sudo apt-get install -y python-dev
   - name: Instalar requirements
     command: sudo pip install -r IV/requirements.txt
-  - name: Execution
-    shell: cd IV && python bot_motoGP/bot.py
+  - name: Ejecutar supervisor
+    service: name=supervisor state=started
