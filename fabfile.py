@@ -3,16 +3,13 @@ import os
 
 env.host = ['miguel:22']
 
-def iniciar_con_supervisor():
-    with shell_env(TOKENMOTOGP=os.environ['TOKENMOTOGP'], DATABASE_URL=os.environ['DATABASE_URL']):
-        run ('sudo supervisorctl start bot_motoGP')
-
-def recargar():
-    run("sudo supervisorctl reload")
-
 def iniciar():
     with shell_env(TOKENMOTOGP=os.environ['TOKENMOTOGP'], DATABASE_URL=os.environ['DATABASE_URL']):
         run ('python IV/bot_motoGP/bot.py')
+
+def demoniohup():
+    with shell_env(TOKENMOTOGP=os.environ['TOKENMOTOGP'], DATABASE_URL=os.environ['DATABASE_URL']):
+        run ('nohup python IV/bot_motoGP/bot.py >& /dev/null &',pty=False)
 
 def descargar():
     run ('sudo rm -rf IV')
