@@ -3,8 +3,9 @@
 ## Proyecto a realizar
 
 [![Build Status](https://travis-ci.org/Miguelmoral/IV.svg?branch=master)](https://travis-ci.org/Miguelmoral/IV)
-[![Heroku Deploy](https://www.herokucdn.com/deploy/button.svg)](https://lit-spire-74429.herokuapp.com/) 
+[![Heroku Deploy](https://www.herokucdn.com/deploy/button.svg)](https://lit-spire-74429.herokuapp.com/)
 [![Docker](https://camo.githubusercontent.com/8a4737bc02fcfeb36a2d7cfb9d3e886e9baf37ad/687474703a2f2f693632382e70686f746f6275636b65742e636f6d2f616c62756d732f7575362f726f6d696c67696c646f2f646f636b657269636f6e5f7a7073776a3369667772772e706e67)](https://hub.docker.com/r/miguelmoral/iv/)
+[![Azure](https://camo.githubusercontent.com/9285dd3998997a0835869065bb15e5d500475034/687474703a2f2f617a7572656465706c6f792e6e65742f6465706c6f79627574746f6e2e706e67)](http://botmotogp.cloudapp.net)
 
 Se va a llevar a cabo la realización de un bot de Telegram para ver información sobre los grandes premios de Moto GP pudiendo hacer consultas de posición de los pilotos o tiempos de estos en distintos grandes premios que se hayan corrido. Para ello se hará uso del web scraping sacando de está forma los datos que nos sean útiles. La web que he elegido para coger la información es esta en concreto ya que el formato no varia, tan solo cambia para los grandes premios que se han corrido en 2016 pero ese problema se puede solucionar de forma facil ya que todos los grandes premios de 2016 tienen el mismo formato entre ellos.
 
@@ -58,7 +59,7 @@ Una vez subamos nuestro proyecto a github y habilitemos en travis ese repositori
 
 ![imagenTravis](http://i64.tinypic.com/262r6mv.png)
 
-Si todo está correcto y se pasa el test travis nos mostrará lo siguiente 
+Si todo está correcto y se pasa el test travis nos mostrará lo siguiente
 
 [![Build Status](https://travis-ci.org/Miguelmoral/IV.svg?branch=master)](https://travis-ci.org/Miguelmoral/IV)
 
@@ -114,9 +115,17 @@ Una vez estemos dentro:
 - `cd IV`
 - `make ejecutar`
 
+### Despliegue en un IAAS:
+
+Crearemos una máquina virtual para el proyecto aprovisioada con todo lo necesario gracias a un archivo ansible.yml
+
+Comando para crear la máquina en azure utilizando vagranfile y el archivo de aprovisonamiento `vagrant up --provider=azure`
+
+Comando para gestionar la máquina virtual `sudo vagrant ssh`
+
+Comando para gestionar la máquina con fabric (Tras configurar correctamente el archivo fabfile.py): `fab -p "contraseña" -H miguel@botmotogp.cloudapp.net comando_a_ejecutar`
+
+Comando para despliege automático: `sudo ./despliege.sh`
 
 
-
-
-
-
+Más información en [enlace](https://miguelmoral.github.io/IV/)
