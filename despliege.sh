@@ -3,10 +3,10 @@
 sudo apt-get update
 
 # Instalación de vagrant
-#wget https://releases.hashicorp.com/vagrant/1.8.7/
-#sudo dpkg -i vagrant_1.8.7_x86_64.deb
+wget https://releases.hashicorp.com/vagrant/1.8.7/
+sudo dpkg -i vagrant_1.8.7_x86_64.deb
 # Instalar plugin para azure
-#vagrant plugin install vagrant-azure
+vagrant plugin install vagrant-azure
 
 # Instalación Ansible
 sudo apt-get install ansible
