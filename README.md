@@ -1,7 +1,7 @@
 # IV- Bot de telegram para consultar los resultados de las sesiones de moto GP
 
 ## Proyecto a realizar
-
+[![Telegram.me](http://lelb.net/wp-content/uploads/2016/01/telegram-icon-e1453881760594.png)](https://telegram.me/Prueba567_bot)
 [![Build Status](https://travis-ci.org/Miguelmoral/IV.svg?branch=master)](https://travis-ci.org/Miguelmoral/IV)
 [![Heroku Deploy](https://www.herokucdn.com/deploy/button.svg)](https://lit-spire-74429.herokuapp.com/)
 [![Docker](https://camo.githubusercontent.com/8a4737bc02fcfeb36a2d7cfb9d3e886e9baf37ad/687474703a2f2f693632382e70686f746f6275636b65742e636f6d2f616c62756d732f7575362f726f6d696c67696c646f2f646f636b657269636f6e5f7a7073776a3369667772772e706e67)](https://hub.docker.com/r/miguelmoral/iv/)
