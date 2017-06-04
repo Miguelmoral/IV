@@ -130,6 +130,3 @@ Comando para despliege automático: `sudo ./despliege.sh`
 
 Más información en [enlace](https://miguelmoral.github.io/IV/)
 
-### Presentado para el consurso de software libre OSL:
-
-![OSLconcurso](http://i64.tinypic.com/ruywie.png)
